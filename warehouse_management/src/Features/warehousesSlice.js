@@ -1,4 +1,4 @@
-// src/features/warehousesSlice.js
+
 import { createSlice } from '@reduxjs/toolkit';
 import data from "../data.json"
 const warehousesSlice = createSlice({
@@ -32,7 +32,6 @@ const warehousesSlice = createSlice({
 
       if (index !== -1) {
         state.warehouses[index] = updatedWarehouse;
-        // Use the spread operator to create a new state object
         state.warehouses = [...state.warehouses];
       }
     },
