@@ -26,30 +26,41 @@ const WarehouseList = () => {
   const handleFilterAvSpace = (event) => {
     dispatch(setFilterAvSpace(event.target.value));
   };
-  const handleSearch = (event) => {
-    dispatch(setSearchWarehouse(event.target.value));
+  function debounce(){
+    let timeoutId;
+    return function(value){
+      if(timeoutId)clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        dispatch(setSearchWarehouse(value));
+       }, 1000);
+      }
+  }
+  const mydebounce=debounce()
+  const handleSearch =(e)=>{
+    mydebounce(e);
   };
+  
 
   return (
     <div className='Container Bg_color'>
       <div className='search_nav'>
-        <input className='searchbox_input'  onChange={handleSearch} placeholder='Search Wearhouse'/>
+        <input className='searchbox_input'  onChange={(e)=>handleSearch(e.target.value)} placeholder='Search Wearhouse'/>
 
         <select className='searchbox_input' onChange={handleFilterCity}>
-          <option value=""  selected>All City</option>
+          <option value=""  defaultValue={""}>All City</option>
           {warehousesCity.map((warehouse,index)=>{
              return(<option key={index} value={warehouse}>{warehouse}</option>)
           })}
         </select>
 
         <select className='searchbox_input' onChange={handleFilterCluster}>
-          <option value=""  selected>All Cluster</option>
+          <option value=""  defaultValue={""}>All Cluster</option>
           {warehousesCluster.map((warehouse,index)=>{
              return(<option key={index} value={warehouse}>{warehouse}</option>)
           })}
         </select>
         <select className='searchbox_input' onChange={handleFilterAvSpace}>
-          <option value=""  selected>All Spaces</option>
+          <option value=""  defaultValue={""}>All Spaces</option>
           {warehousesAvSpace.map((warehouse,index)=>{
              return(<option key={index} value={warehouse}>{warehouse}</option>)
           })}

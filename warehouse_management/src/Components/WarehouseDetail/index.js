@@ -9,14 +9,12 @@ const WarehouseDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const warehouses = useSelector((state) => state.warehouses.warehouses);
-  console.log(warehouses,id)
   const warehouse = warehouses.filter((w) => w.id === Number(id));
   const [editedWarehouse, setEditedWarehouse] = useState({...warehouse[0]});
   const [tempEdit, setTempEdit] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const handleEditSubmit = () => {
     setIsOpen(false);
-    console.log(tempEdit)
     dispatch(updateWarehouse(tempEdit));
     setEditedWarehouse(tempEdit);
   };
